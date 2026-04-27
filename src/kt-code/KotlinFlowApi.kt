@@ -107,24 +107,5 @@ fun main(): kotlin.Unit = runBlocking {
         }
         .collect { println(it) }
 
-    return@runBlocking
 
-    flow {
-        for (i in 1..5) {
-            emit(i)
-            delay(1000)
-        }
-        throw RuntimeException("Caught Exception!")
-    }.flowOn(Dispatchers.IO)
-        .onStart {
-            println("Started")
-        }.onCompletion {
-            println("Completion")
-        }.map {
-            it * it
-        }.catch { e ->
-            println(e.localizedMessage)
-        }.collect {
-            println(it)
-        }
 }
