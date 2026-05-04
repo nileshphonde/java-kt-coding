@@ -3,16 +3,76 @@ package `kt-code`
 class P(val name: String)
 data class User(val name:String)
 
+class Student(val name:String, val age:Int) {
+
+    init {
+        println("Object created $name, $age")
+    }
+
+    fun display() {
+        println(this.toString())
+    }
+}
+
+object Single {
+
+    init {
+        println("init")
+    }
+    fun connect() {
+        println("Connecting...")
+    }
+}
+
+class Person {
+
+    companion object {
+        fun display() {
+            println("Displaying...")
+        }
+    }
+}
 fun main() {
 
     // Difference between var and val
-    p1()
+    //p1()
 
     // null safety
-    p2()
+    //p2()
 
     // Difference between == and ===
-    p3()
+    //p3()
+
+    // late init vs lazy
+    //p4()
+
+    val user: P by lazy {
+        P("Nilesh")
+    }
+    Single.connect()
+    Person.display()
+    Single.connect()
+
+    print(user.name)
+
+    val obj = Student("John", 35)
+    obj.display()
+}
+
+
+fun p4() {
+
+    lateinit var x: String
+
+    x = "nilesh"
+    println(x) // without initialization it will throw UninitializedPropertyAccessException
+
+    val name: String by lazy {
+        println("Initializing name...")
+        "xxx"
+    }
+
+    println(name)
 }
 
 fun p1() {
